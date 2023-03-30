@@ -1,0 +1,31 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/data.csv
+      md5: a9e16eb21d67f412fedb336408928dd4
+      size: 571
+    - path: src/preprocess.py
+      md5: 4ac58239de8435f9d86f8a3447cf2f43
+      size: 116
+    outs:
+    - path: data/clean.csv
+      md5: a9e16eb21d67f412fedb336408928dd4
+      size: 470
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/clean.csv
+      md5: a9e16eb21d67f412fedb336408928dd4
+      size: 571
+    - path: src/train.py
+      md5: 84ead53745d4cd75bf448e8e78390d85
+      size: 775
+    params:
+      params.yaml:
+        solver: lbfgs
+    outs:
+    - path: metrics.json
+      md5: 9479bebd4da0bb1096528455f25cfd5c
+      size: 33
